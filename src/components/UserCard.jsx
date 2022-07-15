@@ -22,11 +22,21 @@ const UserCard = () => {
     }
   };
 
+  const deleteUser = () => {
+    if (index === 0) {
+      data.splice(index, 1);
+      setIndex(index.length - 1);
+    } else {
+      data.splice(index, 1);
+      setIndex(index - 1);
+    }
+  };
+
   return (
     <div id="background">
       <div id="card-main">
         <h2 id="count">
-          {user.id}/{data.length}
+          {index + 1}/{data.length}
         </h2>
         <div id="card-data">
           <span>
@@ -65,7 +75,9 @@ const UserCard = () => {
         </button>
         <div id="edit-container">
           <button className="info-button">Edit</button>
-          <button className="info-button">Delete</button>
+          <button className="info-button" onClick={deleteUser}>
+            Delete
+          </button>
           <button className="info-button">New</button>
         </div>
         <button className="nav-button" onClick={next}>
