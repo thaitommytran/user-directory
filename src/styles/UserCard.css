@@ -46,7 +46,7 @@ span {
 .info-container {
   display: flex;
   align-items: baseline;
-  height: 42px;
+  height: 44px;
   overflow: hidden;
 }
 
@@ -113,4 +113,8 @@ span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.hide-form {
+  display: none;
 }

@@ -4,7 +4,21 @@ import "../styles/UserCard.css";
 
 const UserCard = () => {
   const [index, setIndex] = useState(0);
-  let user = data[index];
+  const [show, setShow] = useState(false);
+  const user = data[index];
+
+  const newUser = {
+    id: data.length + 1,
+    name: {
+      first: "",
+      last: ""
+    },
+    city: "",
+    country: "",
+    employer: "",
+    title: "",
+    favoriteMovies: ["", "", ""]
+  };
 
   const next = () => {
     if (index === data.length - 1) {
@@ -32,22 +46,66 @@ const UserCard = () => {
     }
   };
 
+  const addUser = (e) => {
+    e.preventDefault();
+    data.push(newUser);
+    setShow(!show);
+    setIndex(data.length - 1);
+  };
+
+  const handleChange = (e) => {
+    let key = e.target.name;
+    newUser[key] = e.target.value;
+  };
+
+  const handleNameChange = (e) => {
+    let key = e.target.name;
+    newUser.name[key] = e.target.value;
+  };
+
+  const handleMovieChange = (e) => {
+    let index = e.target.name;
+    newUser.favoriteMovies[index] = e.target.value;
+  };
+
+  const showForm = () => {
+    setShow(!show);
+  };
+
   return (
     <div id="background">
       <div id="card-main">
-      <form className="user-form">
-        <p>First Name: <input name="first" /></p>
-        <p>Last Name: <input name="last" /></p>
-        <p>City: <input name="city" /></p>
-        <p>Country: <input name="country" /></p>
-        <p>Job Title: <input name="title" /></p>
-        <p>Employer: <input name="employer" /></p>
-        <h3>Favorite Movies:</h3>
-        <p>1: <input name="0" /></p>
-        <p>2: <input name="1" /></p>
-        <p>3: <input name="2" /></p>
-        <button>Add User</button>
-      </form>
+        <form className={show ? "user-form" : "hide-form"}>
+          <p>
+            First Name: <input name="first" onChange={handleNameChange} />
+          </p>
+          <p>
+            Last Name: <input name="last" onChange={handleNameChange} />
+          </p>
+          <p>
+            City: <input name="city" onChange={handleChange} />
+          </p>
+          <p>
+            Country: <input name="country" onChange={handleChange} />
+          </p>
+          <p>
+            Job Title: <input name="title" onChange={handleChange} />
+          </p>
+          <p>
+            Employer: <input name="employer" onChange={handleChange} />
+          </p>
+          <h3>Favorite Movies:</h3>
+          <p>
+            1: <input name="0" onChange={handleMovieChange} />
+          </p>
+          <p>
+            2: <input name="1" onChange={handleMovieChange} />
+          </p>
+          <p>
+            3: <input name="2" onChange={handleMovieChange} />
+          </p>
+          <button onClick={addUser}>Add User</button>
+        </form>
         <h2 id="count">
           {index + 1}/{data.length}
         </h2>
@@ -91,7 +149,9 @@ const UserCard = () => {
           <button className="info-button" onClick={deleteUser}>
             Delete
           </button>
-          <button className="info-button">New</button>
+          <button className="info-button" onClick={showForm}>
+            New
+          </button>
         </div>
         <button className="nav-button" onClick={next}>
           Next {">"}
