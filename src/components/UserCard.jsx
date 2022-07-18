@@ -35,6 +35,19 @@ const UserCard = () => {
   return (
     <div id="background">
       <div id="card-main">
+      <form className="user-form">
+        <p>First Name: <input name="first" /></p>
+        <p>Last Name: <input name="last" /></p>
+        <p>City: <input name="city" /></p>
+        <p>Country: <input name="country" /></p>
+        <p>Job Title: <input name="title" /></p>
+        <p>Employer: <input name="employer" /></p>
+        <h3>Favorite Movies:</h3>
+        <p>1: <input name="0" /></p>
+        <p>2: <input name="1" /></p>
+        <p>3: <input name="2" /></p>
+        <button>Add User</button>
+      </form>
         <h2 id="count">
           {index + 1}/{data.length}
         </h2>
